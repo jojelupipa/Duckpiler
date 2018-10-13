@@ -1,10 +1,10 @@
 language: node_js
 
 node_js: 
-  - "stable"
+  - "8.12"
 
 before_install:
-  - npm install -g mocha
-  - cd src; npm install .
-
+  - npm install --save-dev mocha
+  - npm install mocha
+  
 script: npm test
