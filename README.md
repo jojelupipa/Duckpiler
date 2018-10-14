@@ -11,6 +11,16 @@ encontrar [aquí](https://jojelupipa.github.io/Proyecto_IV/).
 El proyecto a desarrollar será un servicio que proporcione un pdf que
 sea el resultado de una compilación de un fichero LaTeX o Markdown.
 
+## Instalación y uso
+
+La
+clase
+[duckpiler](https://github.com/jojelupipa/Duckpiler/blob/master/src/duckpiler.js) será
+la encargada de procesar el archivo que se reciba.
+
+Para probar esta clase, una vez descargado el repositorio ejecutaremos:
+```npm test```
+
 
 ## ¿Por qué?
 
