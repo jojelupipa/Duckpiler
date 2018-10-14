@@ -3,7 +3,7 @@ Proyecto para la asignatura Infraestructura Virtual (UGR)
 [![Build Status](https://travis-ci.com/jojelupipa/Duckpiler.svg?branch=master)](https://travis-ci.org/jojelupipa/Duckpiler)
 
 La página con la documentación se puede
-encontrar [aquí](https://jojelupipa.github.io/Proyecto_IV/).
+encontrar [aquí](https://jojelupipa.github.io/Duckpiler/).
 
 
 **Duckpiler assistant**
