@@ -18,7 +18,9 @@ clase
 [duckpiler](https://github.com/jojelupipa/Duckpiler/blob/master/src/duckpiler.js) será
 la encargada de procesar el archivo que se reciba.
 
-Para probar esta clase, una vez descargado el repositorio ejecutaremos:
+Para probar esta clase, una vez descargado el repositorio
+ejecutaremos:
+
 ```npm test```
 
 
