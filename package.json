@@ -3,7 +3,8 @@
     "test": "mocha"
   },
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mocha": "^5.2.0"
   },
   "name": "duckpiler",
   "description": "Proyecto para la asignatura Infraestructura Virtual (UGR) [![Build Status](https://travis-ci.com/jojelupipa/Duckpiler.svg?branch=master)](https://travis-ci.com/jojelupipa/Duckpiler)",
