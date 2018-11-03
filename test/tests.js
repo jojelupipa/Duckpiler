@@ -1,5 +1,10 @@
-var assert = require('assert');
+const assert = require('assert');
+const request = require('supertest');
+const app = require('../src/index.js');
 const duckpiler = require('../src/duckpiler.js');
+
+
+// Tests unitarios
 
 describe('Duckpiler', function(){
 
@@ -37,4 +42,27 @@ describe('Duckpiler', function(){
         });
     });
     
+});
+
+// Test funcionales
+
+describe('Tests despliegue', function(){
+
+    describe('GET /', function() {
+        it('should return JSON'), function(done) {
+            request(app)
+                .get('/')
+                .expect('Content-Type', /json/)
+                .expect(200,done);
+        }
+    });
+
+        describe('GET /test', function() {
+        it('should return JSON'), function(done) {
+            request(app)
+                .get('/test')
+                .expect('Content-Type', /json/)
+                .expect(200,done);
+        }
+    });
 });
