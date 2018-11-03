@@ -21,6 +21,10 @@ la encargada de procesar el archivo que se reciba.
 Para probar esta clase, una vez descargado el repositorio
 ejecutaremos:
 
+```npm install```
+
+Y posteriormente para probarlo:
+
 ```npm test```
 
 
