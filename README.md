@@ -91,4 +91,21 @@ virtual de desarrollo y se utilizará alguna herramienta de
 construcción para que pueda ser usada por cualquier usuario.
 
 Finalmente el servicio será desplegado en la nube, utilizando alguno
-de los medios previstos (tales como Azure).
+de los medios previstos (finalmente desplegado en Heroku).
+
+
+## Desplegando en Heroku
+
+Se ha elegido Heroku como PaaS para desplegar la aplicación,
+principalmente por ser una de las mejores herramientas gratuitas que
+se integran bien con node.js. Proporciona otras
+facilidades como la sencillez con la que se pueden desplegar
+aplicaciones con simplemente hacer `push` al repositorio de Heroku (de
+hecho, con la configuración adecuada se puede gestionar el push
+automático con cada push al repositorio de github). Permite
+seleccionar la región del servidor en la que estará tu aplicación y
+permite “dormir” o desactivar las aplicaciones cuando estén un tiempo
+sin ser usadas para permitir ahorrar recursos.
+
+
+
