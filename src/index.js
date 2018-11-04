@@ -7,7 +7,7 @@ const duckpiler = require('../src/duckpiler.js');
 var duck = new duckpiler();
 
 app.get('/', function (req, res) {
-    res.status(200).send({"status":"OK"})
+    res.status(200).json({"status":"OK"})
 });
 
 app.get('/test', function (req, res) {
