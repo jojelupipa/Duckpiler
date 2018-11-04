@@ -21,6 +21,10 @@ la encargada de procesar el archivo que se reciba.
 Para probar esta clase, una vez descargado el repositorio
 ejecutaremos:
 
+```npm install```
+
+Y posteriormente para probarlo:
+
 ```npm test```
 
 
@@ -106,26 +110,34 @@ sin ser usadas para permitir ahorrar recursos.
 Para crear la app primero debemos pedirle a heroku que la cree en
 nuestra región. En nuestro repositorio ejecutaríamos:
 
-```heroku apps:create --region eu ```
+```
+heroku apps:create --region eu 
+```
 
 Esto nos dará una aplicación con un nombre aleatorio. Así que podemos
 renombrarlo al nombre que queremos.
 
-```heroku apps:rename --app nombre-aleatorio-69349 genuine-duckpiler```
+```
+heroku apps:rename --app nombre-aleatorio-69349 genuine-duckpiler
+```
 
 Y es importante destacar que esto implica que hay que cambiar la url
 del remote de heroku, pues en caso contrario intentaríamos publicar en
 un repo de heroku que ya no existe.
 
-```git remote set-url heroku
-https://git.heroku.com/genuine-duckpiler.git```
+```
+git remote set-url heroku
+https://git.heroku.com/genuine-duckpiler.git
+```
 
 Antes de publicarlo necesitamos añadir a nuestro proyecto un archivo
 `Procfile` que indique cómo se debe lanzar la aplicación. Este fichero
 simplemente tendrá `web: node src/index.js`. Y para publicarlo
 tendríamos que hacer push a dicho repositorio. 
 
-```git push heroku master```
+```
+git push heroku master
+```
 
 
 Con esto tendríamos nuestra aplicación desplegada.
