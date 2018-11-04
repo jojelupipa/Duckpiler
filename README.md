@@ -120,6 +120,14 @@ un repo de heroku que ya no existe.
 ```git remote set-url heroku
 https://git.heroku.com/genuine-duckpiler.git```
 
-Y para publicarlo tendríamos que hacer push a dicho repositorio.
+Antes de publicarlo necesitamos añadir a nuestro proyecto un archivo
+`Procfile` que indique cómo se debe lanzar la aplicación. Este fichero
+simplemente tendrá `web: node src/index.js`. Y para publicarlo
+tendríamos que hacer push a dicho repositorio. 
 
 ```git push heroku master```
+
+
+Con esto tendríamos nuestra aplicación desplegada.
+
+Despliegue aquí: [https://genuine-duckpiler.herokuapp.com/](https://genuine-duckpiler.herokuapp.com/)
