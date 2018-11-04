@@ -71,7 +71,7 @@ automático que resuelva este problema.
   (conforme desarrollemos el servicio nos daremos cuenta de qué se
   adapta mejor a nuestras necesidades).
 
-* **Despliegue:** La aplicación podrá ser desplegada con una máquina
+* **Desplegar:** La aplicación podrá ser desplegada con una máquina
   virtual en azure, aprovechando el registro que hicimos en [los
   ejercicios del tema introductorio](https://github.com/jojelupipa/Ejercicios_IV_18_19/blob/master/Relaciones%20de%20ejercicios/Tema%201.md) (aunque
   también existen otras alternativas
