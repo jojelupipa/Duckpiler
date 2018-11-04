@@ -46,6 +46,7 @@ describe('Duckpiler', function(){
 
 // Test funcionales
 
+/*
 describe('Tests despliegue', function(){
 
     describe('GET /', function() {
@@ -66,3 +67,5 @@ describe('Tests despliegue', function(){
         }
     });
 });
+
+*/
