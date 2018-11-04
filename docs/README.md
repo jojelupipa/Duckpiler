@@ -38,3 +38,44 @@ Para gestionar la integración continua se ha
 utilizado [travis](https://travis-ci.org/), principalmente por su
 integración con github y su facilidad de uso.
 
+## Desplegando
+
+### Desplegando en Heroku
+
+Se ha elegido Heroku como PaaS para desplegar la aplicación,
+principalmente por ser una de las mejores herramientas gratuitas que
+se integran bien con node.js. Proporciona otras
+facilidades como la sencillez con la que se pueden desplegar
+aplicaciones con simplemente hacer `push` al repositorio de Heroku (de
+hecho, con la configuración adecuada se puede gestionar el push
+automático con cada push al repositorio de github). Permite
+seleccionar la región del servidor en la que estará tu aplicación y
+permite “dormir” o desactivar las aplicaciones cuando estén un tiempo
+sin ser usadas para permitir ahorrar recursos.
+
+Para crear la app primero debemos pedirle a heroku que la cree en
+nuestra región. En nuestro repositorio ejecutaríamos:
+
+```heroku apps:create --region eu ```
+
+Esto nos dará una aplicación con un nombre aleatorio. Así que podemos
+renombrarlo al nombre que queremos.
+
+```heroku apps:rename --app nombre-aleatorio-69349 genuine-duckpiler```
+
+Y es importante destacar que esto implica que hay que cambiar la url
+del remote de heroku, pues en caso contrario intentaríamos publicar en
+un repo de heroku que ya no existe.
+
+```git remote set-url heroku
+https://git.heroku.com/genuine-duckpiler.git```
+
+Antes de publicarlo necesitamos añadir a nuestro proyecto un par de
+cosas, lo primero un archivo `Procfile` que indique cómo se debe
+lanzar la aplicación. Este fichero simplemente tendrá `web: node
+src/index.js`. Además en `package.json` tendremos que añadir un script
+para hacer 
+
+Y para publicarlo tendríamos que hacer push a dicho repositorio.
+
+```git push heroku master```
