@@ -1,6 +1,6 @@
 const assert = require('assert');
 const request = require('supertest');
-const app = require('../src/index.js');
+//const app = require('../src/index.js');
 const duckpiler = require('../src/duckpiler.js');
 
 
