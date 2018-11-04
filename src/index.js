@@ -7,7 +7,7 @@ const duckpiler = require('../src/duckpiler.js');
 var duck = new duckpiler();
 
 app.get('/', function (req, res) {
-    res.status(200).json({"status":"OK"})
+    res.status(200).json({'status':'OK'})
 });
 
 app.get('/test', function (req, res) {
@@ -15,7 +15,7 @@ app.get('/test', function (req, res) {
     var name = 'test.md';
     name = duck.generateOutputFileName(name);
 //    res.send({'filename':name});
-    res.status(200).send({ filename: name });
+    res.status(200).json({ 'filename': name });
 });  
 
 app.listen(port);
