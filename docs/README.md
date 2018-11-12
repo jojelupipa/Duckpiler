@@ -81,3 +81,24 @@ tendríamos que hacer push a dicho repositorio.
 Con esto tendríamos nuestra aplicación desplegada.
 
 Despliegue aquí: [https://genuine-duckpiler.herokuapp.com/](https://genuine-duckpiler.herokuapp.com/)
+
+
+### Despliegue automático desde Github
+
+Cuando estamos trabajando es posible que queramos realizar
+“simultáneamente” el despliegue en Github y en Heroku. Así ahorrarnos
+tener que hacer `push` al repo de Github y de Heroku por separado.
+
+Por suerte podemos encontrar un modo de automatizar este proceso, en
+nuestro caso configuramos desde Heroku el despliegue autorizando el
+acceso al repo de github. Primero tenemos que conectar la aplicación.
+
+![](img/Despliegue_heroku_automatico.png)
+
+
+Y para confirmar simplemente activamos las opciones de despliegue
+automático, que es compatible con CI, para que solo se despliegue en
+caso de haber pasado los tests de Integración Continua.
+
+![](img/Despliegue_heroku_2.png)
+
