@@ -42,10 +42,23 @@ describe('Duckpiler', function(){
         });
     });
 
-    describe('getRawfile(path)', function() {
+    describe('getRawfile(path)', () => {
 
-        it('should return a raw string from github file', function() {
-           
+        it('should return a raw string from github file', () => {
+            let rawtext;
+            duck.getRawFile('https://raw.githubusercontent.com/libreim/apuntesDGIIM/master/AC/ejercicios.md').then( value => {
+                rawtext = value;
+               // console.log(rawtext);
+                assert.typeOf(rawtext, 'string');
+                assert(!rawtext.startsWith('error:'));
+            }).catch(
+                error => {
+                    assert.isNotOk(
+                        error,
+                        'this sould not happen if that url still exists'
+                    );
+                }
+            );
         });
     });
     
