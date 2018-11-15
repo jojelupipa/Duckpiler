@@ -1,4 +1,4 @@
-const assert = require('assert');
+const assert = require('chai').assert;
 const request = require('supertest');
 //const app = require('../src/index.js');
 const duckpiler = require('../src/duckpiler.js');
@@ -20,7 +20,7 @@ describe('Duckpiler', function(){
 
 
     
-    describe('validateExtension()', function(){
+    describe('validateExtension(filename)', function() {
 
         it('should return true if it is a valid extension', function() {
             assert.equal(duck.validateExtension('doc.tex'), true);
@@ -31,7 +31,7 @@ describe('Duckpiler', function(){
         });
     });
 
-    describe('generateOutputFileName()', function(){
+    describe('generateOutputFileName(filename)', function() {
 
         it('should return the same file name but with .pdf extension', function() {
             assert.equal(duck.generateOutputFileName('mydoc.tex'), 'mydoc.pdf');
@@ -39,6 +39,13 @@ describe('Duckpiler', function(){
 
         it('should return \'err\' if the file has a wrong name', function() {
             assert.equal(duck.generateOutputFileName('cats.dog'), 'err');
+        });
+    });
+
+    describe('getRawfile(path)', function() {
+
+        it('should return a raw string from github file', function() {
+           
         });
     });
     
