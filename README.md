@@ -143,3 +143,24 @@ git push heroku master
 Con esto tendríamos nuestra aplicación desplegada.
 
 Despliegue aquí: [https://genuine-duckpiler.herokuapp.com/](https://genuine-duckpiler.herokuapp.com/)
+
+
+## Despliegue con Docker en Zeit
+
+Hemos creado
+un
+[contenedor para nuestro proyecto](https://hub.docker.com/r/jojelupipa/duckpiler/) en
+DockerHub. 
+
+Y posteriormente lo hemos desplegado en Zeit.
+
+Contenedor: https://duckpiler-hinlulcolf.now.sh/
+
+Para el contenedor hemos utilizado un fichero Dockerfile que nos ha
+permitido configurar cómo se construye dicho contenedor y qué comando
+hay que usar para ejecutar nuestra aplicación. Y para el despliegue en
+Zeit hemos proporcionado un archivo de configuración para que se pueda
+desplegar el contenedor de Docker.
+
+Podemos consultar un poco más sobre esta configuración en la
+[documentación de este repositorio](https://github.com/jojelupipa/Duckpiler/blob/master/docs/README.md)

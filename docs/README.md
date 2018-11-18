@@ -102,3 +102,45 @@ caso de haber pasado los tests de Integración Continua.
 
 ![](img/Despliegue_heroku_2.png)
 
+
+## Despliegue con Docker en Zeit
+
+Hemos creado
+un
+[contenedor para nuestro proyecto](https://hub.docker.com/r/jojelupipa/duckpiler/) en
+DockerHub. 
+
+
+Y posteriormente lo hemos desplegado en Zeit con la orden `now`, que
+se ejecuta en función del contenido del archivo `now.json`.
+
+Contenedor: https://duckpiler-hinlulcolf.now.sh/
+
+
+Para el contenedor hemos utilizado un fichero Dockerfile que nos ha
+permitido configurar cómo se construye dicho contenedor y qué comando
+hay que usar para ejecutar nuestra aplicación. Y para el despliegue en
+Zeit hemos proporcionado un archivo de configuración para que se pueda
+desplegar el contenedor de Docker.
+
+
+Es destacable acerca del Dockerfile la siguiente configuración:
+
+```Dockerfile
+FROM node:8.12.0-jessie   # Esta es la imagen desde la que queremos construir 
+
+CMD [ "npm", "start" ]   # Este define el comando para arrancar la aplicación (npm start)
+```
+
+
+Para el archivo `now.json` también hemos tenido que configurar algunas cosas:
+
+```json
+{
+    "type":"docker", // Indica que estamos desplegando un contenedor de Docker
+    "version": 1,
+    "features": { // Previene de la restricción de tamaño
+        "cloud": "v1"
+    }
+}
+```
