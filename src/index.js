@@ -7,6 +7,17 @@ const duckpiler = require('../src/duckpiler.js');
 var duck = new duckpiler();
 
 app.get('/', function (req, res) {
+    res.status(200).json({
+        'routes':[
+            '/',
+            '/status',
+            '/test'
+        ],
+        'status':'OK'
+    })
+});
+
+app.get('/status', function (req, res) {
     res.status(200).json({'status':'OK'})
 });
 
