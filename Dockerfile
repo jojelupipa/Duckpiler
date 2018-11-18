@@ -1,7 +1,7 @@
 # Choose image to build from
 FROM node:8.12.0-jessie
 
-# Choose and create workdir for our app
+# Choose and create workdir for our app 
 WORKDIR /usr/src/app
 
 # Install all dependencies
