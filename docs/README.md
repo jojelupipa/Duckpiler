@@ -105,10 +105,12 @@ caso de haber pasado los tests de Integración Continua.
 
 ## Despliegue con Docker en Zeit
 
+
 Hemos creado
-un
-[contenedor para nuestro proyecto](https://hub.docker.com/r/jojelupipa/duckpiler/) en
-DockerHub. 
+[en
+DockerHub](https://hub.docker.com/r/jojelupipa/duckpiler/) un
+repositorio para nuestro proyecto (al cual se publicará
+automáticamente al hacer push a Github con un webhook). 
 
 
 Y posteriormente lo hemos desplegado en Zeit con la orden `now`, que

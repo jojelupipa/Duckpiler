@@ -148,11 +148,13 @@ Despliegue aquí: [https://genuine-duckpiler.herokuapp.com/](https://genuine-duc
 ## Despliegue con Docker en Zeit
 
 Hemos creado
-un
-[contenedor para nuestro proyecto](https://hub.docker.com/r/jojelupipa/duckpiler/) en
-DockerHub. 
+[en
+DockerHub](https://hub.docker.com/r/jojelupipa/duckpiler/) un
+repositorio para nuestro proyecto (al cual se publicará
+automáticamente al hacer push a Github con un webhook). 
 
-Y posteriormente lo hemos desplegado en Zeit.
+Y posteriormente lo hemos desplegado en Zeit con la orden `now`, que
+se ejecuta en función del contenido del archivo `now.json`.
 
 Contenedor: https://duckpiler-hinlulcolf.now.sh/
 
