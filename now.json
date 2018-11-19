@@ -1,7 +1,7 @@
 {
-    "type":"docker", // Indica que estamos desplegando un contenedor de Docker
+    "type":"docker", 
     "version": 1,
-    "features": { // Previene de la restricción de tamaño
+    "features": { 
         "cloud": "v1"
     }
 }
