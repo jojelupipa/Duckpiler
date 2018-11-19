@@ -23,11 +23,28 @@ app.get('/status', function (req, res) {
 
 app.get('/test', function (req, res) {
     // Procesar documento de prueba
-    var name = 'test.md';
+    let name = 'test.md';
     name = duck.generateOutputFileName(name);
 //    res.send({'filename':name});
     res.status(200).json({ 'filename': name });
-});  
+});
+
+app.get('/raw/:subject/:file', function (req, res) {
+    let rawtext;
+    let route = 'https://raw.githubusercontent.com/libreim/apuntesDGIIM/master/' + req.params.subject + '/' + req.params.file;
+    duck.getRawFile(route).then( value => {
+        rawtext = value;
+        res.status(200).json({
+            'route': route,
+            'rawtext': rawtext});
+    }).catch(
+        error => {
+            res.status(404).json({
+                'route': route,
+                'error': 'file not found'});
+        }
+    );
+});
 
 app.listen(port);
 console.log('Server running at http://127.0.0.1:'+port+'/');
