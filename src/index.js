@@ -11,11 +11,23 @@ var duck = new duckpiler();
 app.get('/', function (req, res) {
     res.status(200).json({
         'routes':[
-            '/',
-            '/status',
-            '/test'
-        ],
-        'status':'OK'
+            {
+                'route':'/',
+                'description': 'Shows this page'
+            }, 
+            {
+                'route': '/raw/:subject/:file ',
+                'description': 'Get raw content from the specified :file and :subject from https://github.com/libreim/apuntesDGIIM'
+            },
+            {
+                'route': '/status',
+                'description': 'Shows the status of the service. Should be \'OK\' if everything is fine'
+            },
+            {
+                'route': '/test',
+                'description': 'Route for testing some functionalities'
+            }
+        ]
     })
 });
 
