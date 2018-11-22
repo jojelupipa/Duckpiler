@@ -2,6 +2,7 @@
 
 const assert = require('chai').assert;
 const request = require('supertest');
+const fs = require('fs');
 //const app = require('../src/index.js');
 const duckpiler = require('../src/duckpiler.js');
 
@@ -45,23 +46,54 @@ describe('Duckpiler', function(){
     });
 
     describe('getRawfile(path)', () => {
-
         it('should return a raw string from github file', () => {
             let rawtext;
-            duck.getRawFile('https://raw.githubusercontent.com/libreim/apuntesDGIIM/master/AC/ejercicios.md').then( value => {
-                rawtext = value;
-               // console.log(rawtext);
-                assert.typeOf(rawtext, 'string');
-                assert(!rawtext.startsWith('error:'));
-            }).catch(
-                error => {
-                    assert.isNotOk(
-                        error,
-                        'this sould not happen if that url still exists'
-                    );
-                }
-            );
+            duck.getRawFile('AC/ejercicios.md')
+                .then( value => {
+                    rawtext = value;
+                    //console.log(rawtext);
+                    assert.typeOf(rawtext, 'string');
+                    assert(!rawtext.startsWith('error:'));
+                })
+                .catch(
+                    error => {
+                        assert.isNotOk(
+                            error,
+                            'this sould not happen if that url still exists'
+                        );
+                    }
+                );
         });
+    });
+
+    /** createPdf is tested in the following test(?)
+
+    describe('createPdf(inputfile)', () => {
+        it('should create a pdf file out of a local file', () => {
+            duck.createPdf('README.md')
+                .then( () => {
+                    assert.isOk(fs.existsSync('README.pdf'), 'pdf created');
+                })
+                .catch( error => {
+                    assert.fail('pdf has not been created: ' + error);
+                });
+        });
+    });
+    **/
+    
+    describe('getPdf(path)', () => {
+        let route = 'FIS/apuntes.md';
+        it('should create a pdf file out of a path (remote file: ' + route + ')',
+           () => {
+               duck.getPdf(route)
+                   .then( () => {
+                       assert(fs.existsSync('FIS-apuntes.pdf'));
+                   })
+                   .catch( error => {
+                       assert.fail('pdf could not be obtained: ' + error);
+                   });
+                  
+           });
     });
     
 });

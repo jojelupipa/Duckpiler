@@ -9,6 +9,10 @@ COPY package*.json ./
 
 RUN npm install
 
+# Compiling dependencies
+RUN apt update
+RUN apt install pandoc -y
+
 # Bundle our app source code
 COPY . .
 
