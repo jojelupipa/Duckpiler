@@ -2,7 +2,7 @@
   "scripts": {
       "test": "mocha",
       "start": "node src/index",
-      "heroku-prebuild": "apt update && apt install pandoc -y"
+      "heroku-prebuild": "apt-get update && apt-get install pandoc -y"
   },
   "dependencies": {
     "chai": "^4.2.0",
