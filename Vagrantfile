@@ -6,6 +6,7 @@ Vagrant.configure("2") do |config|
   ## Configurando máquinas de azure
   
   config.vm.box = "azure"
+  config.vm.synced_folder '.', '/vagrant', :disabled => true  ## Evitamos que se sincronicen elementos no deseados
 
   config.ssh.private_key_path = '~/.ssh/id_rsa'
 
