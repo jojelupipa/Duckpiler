@@ -7,6 +7,7 @@ const app = express();
 const port = process.env.PORT || 8080;
 const duckpiler = require('../src/duckpiler.js');
 var duck = new duckpiler();
+process.title = 'myApp';
 
 app.get('/', function (req, res) {
     res.status(200).json({

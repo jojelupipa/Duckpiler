@@ -1,41 +1,42 @@
 {
-  "scripts": {
-    "test": "mocha",
-    "start": "nodejs src/index"
-  },
-  "dependencies": {
-    "chai": "^4.2.0",
-    "express": "^4.16.4",
-    "mocha": "^5.2.0",
-    "request": "^2.88.0",
-    "supertest": "^3.3.0"
-  },
-  "name": "duckpiler",
-  "description": "Proyecto para la asignatura Infraestructura Virtual (UGR) [![Build Status](https://travis-ci.com/jojelupipa/Duckpiler.svg?branch=master)](https://travis-ci.com/jojelupipa/Duckpiler)",
-  "version": "1.0.0",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs",
-    "test": "test"
-  },
-  "devDependencies": {
-    "flightplan": "^0.6.19"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jojelupipa/Duckpiler.git"
-  },
-  "keywords": [
-    "duckpiler",
-    "duck",
-    "piler",
-    "compiler",
-    "goose"
-  ],
-  "author": "@jojelupipa",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/jojelupipa/Duckpiler/issues"
-  },
-  "homepage": "https://github.com/jojelupipa/Duckpiler#readme"
+    "scripts": {
+        "test": "mocha",
+        "start": "nodejs src/index",
+        "stop": "pkill --signal SIGINT myApp"
+    },
+    "dependencies": {
+        "chai": "^4.2.0",
+        "express": "^4.16.4",
+        "mocha": "^5.2.0",
+        "request": "^2.88.0",
+        "supertest": "^3.3.0"
+    },
+    "name": "duckpiler",
+    "description": "Proyecto para la asignatura Infraestructura Virtual (UGR) [![Build Status](https://travis-ci.com/jojelupipa/Duckpiler.svg?branch=master)](https://travis-ci.com/jojelupipa/Duckpiler)",
+    "version": "1.0.0",
+    "main": "index.js",
+    "directories": {
+        "doc": "docs",
+        "test": "test"
+    },
+    "devDependencies": {
+        "flightplan": "^0.6.19"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jojelupipa/Duckpiler.git"
+    },
+    "keywords": [
+        "duckpiler",
+        "duck",
+        "piler",
+        "compiler",
+        "goose"
+    ],
+    "author": "@jojelupipa",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/jojelupipa/Duckpiler/issues"
+    },
+    "homepage": "https://github.com/jojelupipa/Duckpiler#readme"
 }
