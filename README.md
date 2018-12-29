@@ -166,3 +166,32 @@ desplegar el contenedor de Docker.
 
 Podemos consultar un poco más sobre esta configuración en la
 [documentación de este repositorio](https://github.com/jojelupipa/Duckpiler/blob/master/docs/README.md)
+
+## Replicación del entorno
+
+¿Quieres probar el servicio en un entorno testeado?
+
+Bien sea para desarrollar o para probarlo por ti mismo puedes hacer
+uso de [vagrant](https://www.vagrantup.com/) para desplegar una
+máquina debidamente provisionada
+con [chef](https://www.chef.io/chef/). Simplemente tienes que usar
+`vagrant up` ya puedes disponer de una máquina con todo lo necesario.
+
+Esta configuración se ha hecho para desplegar una máquina virtual de
+azure. Si quieres ver alguna alternativa para hacerlo en local
+consulta la
+documentación [aquí](https://jojelupipa.github.io/Duckpiler/)
+
+Para desplegar la aplicación en este nuevo entorno hemos
+usado [flightplan](https://www.npmjs.com/package/flightplan)
+*(aprovechando que estamos usando nodejs)*. Con
+un [conjunto de planes](https://jojelupipa.github.io/Duckpiler/) 
+para desplegar, detener o reanudar la aplicación (como parte de las
+tareas de mantenimiento). 
+
+En definitiva cualquiera puede coger este proyecto y desplegarlo con
+dos sencillas órdenes:
+
+`vagrant up`
+
+`fly deployTo:azure --flightplan despliegue/flightplan.js`
