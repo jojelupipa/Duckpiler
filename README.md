@@ -195,3 +195,9 @@ dos sencillas órdenes:
 `vagrant up`
 
 `fly deployTo:azure --flightplan despliegue/flightplan.js`
+
+Normalmente, cuando está desplegada se encuentra la aplicación en
+[este dominio](http://duckpiler.westeurope.cloudapp.azure.com:8080). Pero
+por motivos didácticos aquí adjunto la IP actual:
+
+Despliegue final: 40.118.125.5:8080
