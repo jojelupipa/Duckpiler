@@ -7,6 +7,8 @@ El proyecto a desarrollar será un servicio que proporcione un pdf que
 sea el resultado de una compilación de un fichero LaTeX o Markdown.
 
 
+
+
 ## ¿Por qué?
 
 En numerosas ocasiones, trabajando en el [repositorio de los apuntes
@@ -21,12 +23,12 @@ automático que resuelva este problema.
 
 ### Herramientas utilizadas
 
-Para llevar a cabo los tests se han usado (dada la simplicidad de los
+Para llevar a cabo los tests se empezó usando (dada la simplicidad de los
 tests actuales) el
 módulo [assert](https://nodejs.org/api/assert.html), que se encuentra
-incluído en node. Si posteriormente se observase un beneficio por
+incluído en node. Pero posteriormente se observó un beneficio por
 utilizar [chai](https://www.chaijs.com/) para realizar tests más
-complejos no sería ningún problema incluirlo en el proyecto.
+complejos.
 
 Para ejecutar los tests se ha usado [Mocha](https://mochajs.org/),
 pues es un framework bastante extendido y cómodo que nos describe el
@@ -37,6 +39,15 @@ probar la aplicación).
 Para gestionar la integración continua se ha
 utilizado [travis](https://travis-ci.org/), principalmente por su
 integración con github y su facilidad de uso.
+
+Para gestionar el despliegue se ha realizado con una máquina
+virtual en azure, aprovechando el registro que hicimos
+en
+[los ejercicios del tema introductorio](https://github.com/jojelupipa/Ejercicios_IV_18_19/blob/master/Relaciones%20de%20ejercicios/Tema%201.md) y
+las suscripciones proporcionadas por el profesor de la asignatura
+(aunque   también existen otras alternativas
+como [Heroku](https://www.heroku.com/nodejs), que también es popular
+en el uso de node.js o [zeit](http://zeit.co/)) 
 
 ## Desplegando
 
@@ -72,8 +83,10 @@ https://git.heroku.com/genuine-duckpiler.git```
 
 Antes de publicarlo necesitamos añadir a nuestro proyecto un archivo
 `Procfile` que indique cómo se debe lanzar la aplicación. Este fichero
-simplemente tendrá `web: node src/index.js`. Y para publicarlo
-tendríamos que hacer push a dicho repositorio. 
+simplemente tendrá `web: npm start`. `web:` implica que es una
+aplicación web y `npm start` indica cómo se ha de ejecutar esta
+aplicación web. Y para publicarlo tendríamos que hacer push a dicho
+repositorio. 
 
 ```git push heroku master```
 
