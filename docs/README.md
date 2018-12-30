@@ -146,3 +146,81 @@ Para el archivo `now.json` también hemos tenido que configurar algunas cosas:
     }
 }
 ```
+
+## Replicación del entorno
+
+¿Quieres probar el servicio en un entorno testeado?
+
+Bien sea para desarrollar o para probarlo por ti mismo puedes hacer
+uso de [vagrant](https://www.vagrantup.com/) para desplegar una
+máquina debidamente provisionada
+con [chef](https://www.chef.io/chef/). Simplemente tienes que usar
+`vagrant up` ya puedes disponer de una máquina con todo lo necesario.
+
+Esta configuración se ha hecho para desplegar una máquina virtual de
+azure. 
+
+### Replicación del entorno sin Azure
+
+Si quieres conseguir una máquina virtual local que esté igualmente
+configurada puedes ignorar las especificaciones del Vagrantfile para
+Azure y usar otro genérico como este:
+
+```ruby
+Vagrant.configure("2") do |config|
+  config.vm.box = "nombre_maquina_virtual"
+  
+  # Redirigir el puerto del servicio a tu puerto 5000 (puede elegirse otro)
+  config.vm.network "forwarded_port", guest: 5000, host: 8080
+
+
+  # Install with chef
+
+  config.vm.provision "chef_solo" do |chef|
+    chef.add_recipe "emacs"
+    chef.add_recipe "git"
+  end
+end
+```
+
+Esto, tras descargar alguna [vagrantbox](https://www.vagrantbox.es/) y
+sustituir el valor de `config.vm.box` por el que corresponda
+permitiría preparar un entorno debidamente provisionado con `vagrant
+up`. Lo que dejaría lista la máquina para trabajar con ella con
+`vagrant ssh` *(una conexión ssh “automatizada” a esta máquina)*.
+
+
+## Despliegue de la aplicación en entorno remoto
+
+Para desplegar la aplicación en este nuevo entorno hemos
+usado [flightplan](https://www.npmjs.com/package/flightplan)
+*(aprovechando que estamos usando nodejs)*. 
+
+Con este **conjunto de planes** podemos:
+
+Desplegar de cero la aplicación y tenerla de servicio
+
+`fly deployTo:azure --flightplan despliegue/flightplan.js` 
+
+Detener con otro plan de vuelo la ejecución del servicio
+
+`fly stop:azure --flightplan despliegue/flightplan.js` 
+
+Reanudar el servicio
+
+`fly run:azure --flightplan despliegue/flightplan.js` 
+
+Borrar el repositorio
+
+`fly deleteAll:azure --flightplan despliegue/flightplan.js` 
+
+
+En definitiva cualquiera puede coger este proyecto y desplegarlo con
+dos sencillas órdenes:
+
+`vagrant up`
+
+`fly deployTo:azure --flightplan despliegue/flightplan.js`
+
+Normalmente, cuando está desplegada se encuentra la aplicación en
+[este dominio](http://duckpiler.westeurope.cloudapp.azure.com:8080).

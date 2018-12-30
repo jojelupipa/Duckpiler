@@ -182,6 +182,8 @@ azure. Si quieres ver alguna alternativa para hacerlo en local
 consulta la
 documentación [aquí](https://jojelupipa.github.io/Duckpiler/)
 
+## Despliegue de la aplicación en entorno remoto
+
 Para desplegar la aplicación en este nuevo entorno hemos
 usado [flightplan](https://www.npmjs.com/package/flightplan)
 *(aprovechando que estamos usando nodejs)*. Con
