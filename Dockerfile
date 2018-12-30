@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package.json ./
 
 # Get the code
-COPY src ./
+COPY ./src/ ./
 
 RUN npm install
 
