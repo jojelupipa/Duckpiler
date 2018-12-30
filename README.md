@@ -9,6 +9,7 @@ encontrar [aquí](https://jojelupipa.github.io/Duckpiler/).
 Indice
 ======
 
+<!--ts-->
     * [Requisitos](#requisitos)
       * [Otros requisitos](#otros-requisitos)
     * [Instalación y uso](#instalacion-y-uso)
@@ -19,7 +20,7 @@ Indice
     * [Despliegue con Docker en Zeit](#despliegue-con-docker-en-zeit)
     * [Replicación del entorno](#replicacion-del-entorno)
     * [Despliegue de la aplicación en entorno remoto](#despliegue-de-la-aplicacion-en-entorno-remoto)
-
+<!--te-->
 
 **Duckpiler assistant**
 
