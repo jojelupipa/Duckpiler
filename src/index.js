@@ -14,7 +14,7 @@ app.get('/', function (req, res) {
         'routes':[
             {
                 'route':'/',
-                'description': 'Shows this page'
+                'description': 'Returns this JSON'
             }, 
             {
                 'route': '/raw/:subject/:file ',
