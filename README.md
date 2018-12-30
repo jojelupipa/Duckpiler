@@ -12,9 +12,9 @@ Indice
 <!--ts-->
 * [Requisitos](#requisitos)
   * [Otros requisitos](#otros-requisitos)
-* [Instalación y uso](#instalacion-y-uso)
+* [Instalación y uso](#instalación-y-uso)
   * [Probando la clase principal](#probando-la-clase-principal)
-* [¿Por qué?](#¿por-que?)
+* [¿Por qué?](#por-qué)
 * [Herramientas](#herramientas)
 * [Despliegue en heroku](#desplegando-en-heroku)
 * [Despliegue con Docker en Zeit](#despliegue-con-docker-en-zeit)
