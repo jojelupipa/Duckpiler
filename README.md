@@ -10,16 +10,16 @@ Indice
 ======
 
 <!--ts-->
-    * [Requisitos](#requisitos)
-      * [Otros requisitos](#otros-requisitos)
-    * [Instalación y uso](#instalacion-y-uso)
-      * [Probando la clase principal](#probando-la-clase-principal)
-    * [¿Por qué?](#¿por-que?)
-    * [Herramientas](#herramientas)
-    * [Despliegue en heroku](#desplegando-en-heroku)
-    * [Despliegue con Docker en Zeit](#despliegue-con-docker-en-zeit)
-    * [Replicación del entorno](#replicacion-del-entorno)
-    * [Despliegue de la aplicación en entorno remoto](#despliegue-de-la-aplicacion-en-entorno-remoto)
+* [Requisitos](#requisitos)
+  * [Otros requisitos](#otros-requisitos)
+* [Instalación y uso](#instalacion-y-uso)
+  * [Probando la clase principal](#probando-la-clase-principal)
+* [¿Por qué?](#¿por-que?)
+* [Herramientas](#herramientas)
+* [Despliegue en heroku](#desplegando-en-heroku)
+* [Despliegue con Docker en Zeit](#despliegue-con-docker-en-zeit)
+* [Replicación del entorno](#replicacion-del-entorno)
+* [Despliegue de la aplicación en entorno remoto](#despliegue-de-la-aplicacion-en-entorno-remoto)
 <!--te-->
 
 **Duckpiler assistant**
