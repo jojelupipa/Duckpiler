@@ -8,17 +8,13 @@ WORKDIR /usr/src/app
 COPY package.json ./
 
 # Get the code
-COPY ./src/ ./
+COPY ./src/ /usr/src/app
 
 RUN npm install
 
 # Compiling dependencies
 RUN apt update
 RUN apt install pandoc -y
-
-
-# Bind app to specific port
-EXPOSE 8080
 
 # Define command to run the app
 CMD [ "npm", "start" ]
