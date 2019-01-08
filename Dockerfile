@@ -4,17 +4,16 @@ FROM node:8.12.0-jessie
 # Choose and create workdir for our app 
 WORKDIR /usr/src/app
 
-
-# Get the code
-ADD ./src /usr/src/app
-
 # Install all dependencies
-ADD ./package.json /usr/src/app
+ADD package.json ./
 RUN npm install
 
+# Get the code
+ADD src ./
+
 # Compiling dependencies
-RUN apt update
-RUN apt install pandoc -y
+RUN apt-get update
+RUN apt-get install pandoc -y
 
 # Define command to run the app
 CMD [ "npm", "start" ]
