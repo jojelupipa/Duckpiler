@@ -4,12 +4,12 @@ FROM node:8.12.0-jessie
 # Choose and create workdir for our app 
 WORKDIR /usr/src/app
 
-# Install all dependencies
-COPY package.json ./
 
 # Get the code
-COPY ./src/ /usr/src/app
+ADD ./src /usr/src/app
 
+# Install all dependencies
+ADD ./package.json /usr/src/app
 RUN npm install
 
 # Compiling dependencies
