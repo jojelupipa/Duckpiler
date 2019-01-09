@@ -12,7 +12,7 @@ RUN npm install
 COPY ./src ./src 
 
 # Enable port that our server will be listening at
-EXPOSE 8080
+#EXPOSE 8080
 
 # Compiling dependencies
 RUN apt-get update

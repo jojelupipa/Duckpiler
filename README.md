@@ -18,8 +18,8 @@ Indice
 * [Herramientas](#herramientas)
 * [Despliegue en heroku](#desplegando-en-heroku)
 * [Despliegue con Docker en Zeit](#despliegue-con-docker-en-zeit)
-* [Replicación del entorno](#replicacion-del-entorno)
-* [Despliegue de la aplicación en entorno remoto](#despliegue-de-la-aplicacion-en-entorno-remoto)
+* [Replicación del entorno](#replicación-del-entorno)
+* [Despliegue de la aplicación en entorno remoto](#despliegue-de-la-aplicación-en-entorno-remoto)
 <!--te-->
 
 **Duckpiler assistant**
