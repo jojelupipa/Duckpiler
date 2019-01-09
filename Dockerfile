@@ -1,5 +1,5 @@
 # Choose image to build from
-FROM node:8.12.0-jessie
+FROM node:8.15.0-alpine
 
 # Choose and create workdir for our app 
 WORKDIR /usr/src/app

@@ -18,20 +18,20 @@ plan.remote(
         remote.exec('npm install --prefix Duckpiler');
 
         // Launching service
-        remote.exec('npm start --prefix Duckpiler');
+        remote.exec('sudo npm start --prefix Duckpiler');
     });
 
 plan.remote(
     'run',
     remote => {
         // Launching service
-        remote.exec('npm start --prefix Duckpiler');
+        remote.exec('sudo npm start --prefix Duckpiler');
     });
 
 plan.remote(
     'stop',
     remote => {
-        remote.exec('npm stop --prefix Duckpiler');
+        remote.exec('sudo npm stop --prefix Duckpiler');
     });
 
 plan.remote(
