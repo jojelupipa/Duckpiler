@@ -16,6 +16,7 @@ EXPOSE 80
 
 # Compiling dependencies
 RUN apt-get update
+RUN apt-get install sudo
 RUN apt-get install pandoc -y
 
 # Define command to run the app
