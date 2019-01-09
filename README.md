@@ -165,42 +165,10 @@ seleccionar la región del servidor en la que estará tu aplicación y
 permite “dormir” o desactivar las aplicaciones cuando estén un tiempo
 sin ser usadas para permitir ahorrar recursos.
 
-Para crear la app primero debemos pedirle a heroku que la cree en
-nuestra región. En nuestro repositorio ejecutaríamos:
-
-```
-heroku apps:create --region eu
-```
-
-Esto nos dará una aplicación con un nombre aleatorio. Así que podemos
-renombrarlo al nombre que queremos.
-
-```
-heroku apps:rename --app nombre-aleatorio-69349 genuine-duckpiler
-```
-
-Y es importante destacar que esto implica que hay que cambiar la url
-del remote de heroku, pues en caso contrario intentaríamos publicar en
-un repo de heroku que ya no existe.
-
-```
-git remote set-url heroku
-https://git.heroku.com/genuine-duckpiler.git
-```
-
-Antes de publicarlo necesitamos añadir a nuestro proyecto un archivo
-`Procfile` que indique cómo se debe lanzar la aplicación. Este fichero
-simplemente tendrá `web: npm start`. `web:` implica que es una
-aplicación web y `npm start` indica cómo se ha de ejecutar esta
-aplicación web. Y para publicarlo tendríamos que hacer push a dicho
-repositorio.
-
-```
-git push heroku master
-```
-
-
-Con esto tendríamos nuestra aplicación desplegada.
+Podemos
+ver
+[los pasos a seguir](https://jojelupipa.github.io/Duckpiler/#desplegando-en-heroku) con
+los que tendríamos nuestra aplicación desplegada.
 
 Despliegue aquí: [https://genuine-duckpiler.herokuapp.com/](https://genuine-duckpiler.herokuapp.com/)
 
@@ -240,14 +208,14 @@ con [chef](https://www.chef.io/chef/). Simplemente tienes que usar
 Esta configuración se ha hecho para desplegar una máquina virtual de
 azure. Si quieres ver alguna alternativa para hacerlo en local
 consulta la
-documentación [aquí](https://jojelupipa.github.io/Duckpiler/)
+documentación [aquí](https://jojelupipa.github.io/Duckpiler/#replicaci%C3%B3n-del-entorno-sin-azure)
 
 ## Despliegue de la aplicación en entorno remoto
 
 Para desplegar la aplicación en este nuevo entorno hemos
 usado [flightplan](https://www.npmjs.com/package/flightplan)
 *(aprovechando que estamos usando nodejs)*. Con
-un [conjunto de planes](https://jojelupipa.github.io/Duckpiler/)
+un [conjunto de planes](https://jojelupipa.github.io/Duckpiler/#despliegue-de-la-aplicaci%C3%B3n-en-entorno-remoto)
 para desplegar, detener o reanudar la aplicación (como parte de las
 tareas de mantenimiento).
 

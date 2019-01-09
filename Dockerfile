@@ -9,7 +9,7 @@ ADD package.json ./
 RUN npm install
 
 # Get the code
-ADD src ./
+ADD . .
 
 # Compiling dependencies
 RUN apt-get update
