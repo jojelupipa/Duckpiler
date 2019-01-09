@@ -19,5 +19,5 @@ RUN apt-get update
 RUN apt-get install pandoc -y
 
 # Define command to run the app
-CMD [ "npm", "start" ]
+CMD [ "sudo" ,"npm", "start" ]
 

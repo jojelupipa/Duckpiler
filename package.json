@@ -1,7 +1,7 @@
 {
     "scripts": {
         "test": "mocha",
-        "start": "sudo nodejs src/index",
+        "start": "nodejs src/index",
         "stop": "pkill --signal SIGINT myApp"
     },
     "dependencies": {
