@@ -3,18 +3,25 @@
 # vi: set ft=ruby :
 Vagrant.configure("2") do |config|
 
-  ## Configurando máquinas de azure
-  
-  config.vm.box = "azure"
-  config.vm.synced_folder '.', '/vagrant', :disabled => true  ## Evitamos que se sincronicen elementos no deseados
+  ## Setting azure machines
 
+  ### Name of the locally installed vagrant box that will be used
+  config.vm.box = "azure"
+  
   config.ssh.private_key_path = '~/.ssh/id_rsa'
 
   config.vm.provider :azure do |azure, override|
+    ### Setting VM name, instead of using a random one
     azure.vm_name = "duckpiler"
+
+    ### Setting resource group (it will avoid creating a new random one for every deployment. You may comment this line if you are creating many in a short lapse of time so that you won't have to wait until it's removed in order to deploy again)
+    #azure.resource_group_name = "duckpiler_resource_group"
+
+    ### Choose a suitable server to host your VM according to your location
     azure.location = "westeurope"
-    azure.tcp_endpoints = "8080"   ### Configurando puertos de red a abrir
-    
+
+    azure.tcp_endpoints = "80"
+    ### Set up the environment vars (suscription details) to allow proper creation of the VM's and its resources
     azure.tenant_id = ENV['AZURE_TENANT_ID']
     azure.client_id = ENV['AZURE_CLIENT_ID']
     azure.client_secret = ENV['AZURE_CLIENT_SECRET']
@@ -22,11 +29,14 @@ Vagrant.configure("2") do |config|
   end
 
 
-  ## Configurando Chef para provisionamiento
+  ## Setting up Chef for provision.
 
   config.vm.provision "chef_solo" do |chef|
-    chef.cookbooks_path = "provision"    
+    ### Route to cookbooks
+    chef.cookbooks_path = "provision"
+    ### Route to roles
     chef.roles_path = "provision/roles"
+    ### Roles to add
     chef.add_role("vagrant")
   end  
 
@@ -51,33 +61,4 @@ Vagrant.configure("2") do |config|
   # Bridged networks make the machine appear as another physical device on
   # your network.
   # config.vm.network "public_network"
-
-  # Share an additional folder to the guest VM. The first argument is
-  # the path on the host to the actual folder. The second argument is
-  # the path on the guest to mount the folder. And the optional third
-  # argument is a set of non-required options.
-  # config.vm.synced_folder "../data", "/vagrant_data"
-
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
-  # config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
-  # end
-  #
-  # View the documentation for the provider you are using for more
-  # information on available options.
-
-  # Enable provisioning with a shell script. Additional provisioners such as
-  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
-  # documentation for more information about their specific syntax and use.
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   apt-get update
-  #   apt-get install -y apache2
-  # SHELL
 end
