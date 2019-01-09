@@ -5,11 +5,14 @@ FROM node:8.12.0-jessie
 WORKDIR /usr/src/app
 
 # Install all dependencies
-ADD package.json ./
+COPY package.json ./
 RUN npm install
 
 # Get the code
-ADD . .
+COPY ./src ./src 
+
+# Enable port that our server will be listening at
+EXPOSE 8080
 
 # Compiling dependencies
 RUN apt-get update
