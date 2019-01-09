@@ -142,11 +142,29 @@ desplegar el contenedor de Docker.
 Es destacable acerca del Dockerfile la siguiente configuración:
 
 ```Dockerfile
-FROM node:8.12.0-jessie   # Esta es la imagen desde la que queremos construir 
+# Esta es la imagen desde la que queremos construir 
+FROM node:8.12.0-jessie
 
-CMD [ "npm", "start" ]   # Este define el comando para arrancar la aplicación (npm start)
+# El directorio (arbitrario) sobre el cual trabajaremos
+WORKDIR /usr/src/app
+
+# La instalación de dependencias de npm
+COPY package.json ./
+RUN npm install
+
+# La copia del código que queramos ejecutar en el servidor
+COPY ./src ./src 
+
+# La activación de la escucha en el puerto que de nuestro servicio
+EXPOSE 8080
+
+# La instalación de los paquetes que se requieran
+RUN apt-get update
+RUN apt-get install pandoc -y
+
+# El comando que se utilizará para lanzar el contenedor y desplegar la app
+CMD [ "npm", "start" ]
 ```
-
 
 Para el archivo `now.json` también hemos tenido que configurar algunas cosas:
 
