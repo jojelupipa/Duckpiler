@@ -6,9 +6,6 @@ Proyecto para la asignatura Infraestructura Virtual (UGR)
 El proyecto a desarrollar será un servicio que proporcione un pdf que
 sea el resultado de una compilación de un fichero LaTeX o Markdown.
 
-
-
-
 ## ¿Por qué?
 
 En numerosas ocasiones, trabajando en el [repositorio de los apuntes
@@ -49,6 +46,25 @@ las suscripciones proporcionadas por el profesor de la asignatura
 como [Heroku](https://www.heroku.com/nodejs), que también es popular
 en el uso de node.js o [zeit](http://zeit.co/)) 
 
+La configuración que usará travis para realizar las pruebas de
+integración continua se debe indicar en el fichero `.travis.yml`.
+En el cual indicaremos qué lenguaje estamos usando, su versión, las
+dependencias necesarias a instalar y el script a usar para probar los
+tests:
+
+```yaml
+language: node_js
+
+node_js: 
+  - "8.12"
+
+before_install:
+  - npm install --save-dev mocha
+  - npm install mocha
+  
+script: npm test
+```
+
 ## Desplegando
 
 ### Desplegando en Heroku
@@ -83,13 +99,21 @@ https://git.heroku.com/genuine-duckpiler.git```
 
 Antes de publicarlo necesitamos añadir a nuestro proyecto un archivo
 `Procfile` que indique cómo se debe lanzar la aplicación. Este fichero
-simplemente tendrá `web: npm start`. `web:` implica que es una
-aplicación web y `npm start` indica cómo se ha de ejecutar esta
+simplemente tendrá `web: sudo npm start`. `web:` implica que es una
+aplicación web y `sudo npm start` indica cómo se ha de ejecutar esta
 aplicación web. Y para publicarlo tendríamos que hacer push a dicho
 repositorio. 
 
 ```git push heroku master```
 
+Si queremos desplegar la aplicación como un contenedor de docker
+tenemos que indicarlo en el archivo `heroku.yml`.
+
+```yaml
+build:
+  docker:
+web: Dockerfile
+```
 
 Con esto tendríamos nuestra aplicación desplegada.
 
@@ -129,6 +153,20 @@ automáticamente al hacer push a Github con un webhook).
 Y posteriormente lo hemos desplegado en Zeit con la orden `now`, que
 se ejecuta en función del contenido del archivo `now.json`.
 
+
+Para el archivo `now.json` hemos tenido que configurar algunas cosas:
+
+```json
+{
+    "type":"docker", // Indica que estamos desplegando un contenedor de Docker
+    "version": 1,
+    "features": { // Previene de la restricción de tamaño
+        "cloud": "v1"
+    }
+}
+```
+
+
 Contenedor: https://duckpiler-gxwwizygwr.now.sh/
 
 
@@ -143,7 +181,7 @@ Es destacable acerca del Dockerfile la siguiente configuración:
 
 ```Dockerfile
 # Esta es la imagen desde la que queremos construir 
-FROM node:8.12.0-jessie
+FROM node:8.15.0-jessie
 
 # El directorio (arbitrario) sobre el cual trabajaremos
 WORKDIR /usr/src/app
@@ -156,7 +194,7 @@ RUN npm install
 COPY ./src ./src 
 
 # La activación de la escucha en el puerto que de nuestro servicio
-EXPOSE 8080
+EXPOSE 80
 
 # La instalación de los paquetes que se requieran
 RUN apt-get update
@@ -164,18 +202,6 @@ RUN apt-get install pandoc -y
 
 # El comando que se utilizará para lanzar el contenedor y desplegar la app
 CMD [ "npm", "start" ]
-```
-
-Para el archivo `now.json` también hemos tenido que configurar algunas cosas:
-
-```json
-{
-    "type":"docker", // Indica que estamos desplegando un contenedor de Docker
-    "version": 1,
-    "features": { // Previene de la restricción de tamaño
-        "cloud": "v1"
-    }
-}
 ```
 
 ## Replicación del entorno
@@ -332,7 +358,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "nombre_maquina_virtual"
   
   # Redirigir el puerto del servicio a tu puerto 5000 (puede elegirse otro)
-  config.vm.network "forwarded_port", guest: 5000, host: 8080
+  config.vm.network "forwarded_port", guest: 5000, host: 80
 
 
   # Install with chef

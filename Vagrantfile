@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
 
   ## Setting azure machines
 
-  ### Name of the locally installed vagrant box that will be used
+  ### Name of the locally installed/hashicorp's vagrant box that will be used
   config.vm.box = "azure"
 
   ### Locate ssh key
