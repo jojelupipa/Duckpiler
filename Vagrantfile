@@ -7,7 +7,8 @@ Vagrant.configure("2") do |config|
 
   ### Name of the locally installed vagrant box that will be used
   config.vm.box = "azure"
-  
+
+  ### Locate ssh key
   config.ssh.private_key_path = '~/.ssh/id_rsa'
 
   config.vm.provider :azure do |azure, override|
@@ -20,14 +21,15 @@ Vagrant.configure("2") do |config|
     ### Choose a suitable server to host your VM according to your location
     azure.location = "westeurope"
 
+    ### Expose suitable port
     azure.tcp_endpoints = "80"
+    
     ### Set up the environment vars (suscription details) to allow proper creation of the VM's and its resources
     azure.tenant_id = ENV['AZURE_TENANT_ID']
     azure.client_id = ENV['AZURE_CLIENT_ID']
     azure.client_secret = ENV['AZURE_CLIENT_SECRET']
     azure.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']
   end
-
 
   ## Setting up Chef for provision.
 
@@ -39,26 +41,4 @@ Vagrant.configure("2") do |config|
     ### Roles to add
     chef.add_role("vagrant")
   end  
-
-
-  
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  # NOTE: This will enable public access to the opened port
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
-
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine and only allow access
-  # via 127.0.0.1 to disable public access
-  # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
-
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  # config.vm.network "private_network", ip: "192.168.33.10"
-
-  # Create a public network, which generally matched to bridged network.
-  # Bridged networks make the machine appear as another physical device on
-  # your network.
-  # config.vm.network "public_network"
 end
