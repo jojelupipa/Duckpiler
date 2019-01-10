@@ -2,7 +2,7 @@
   "name": "vagrant",
   "chef_type": "role",
   "json_class": "Chef::Role",
-  "description": "vagrant instance, responsible for deploying a vm for a developer",
+  "description": "Vagrant instance, responsible for deploying a VM",
   "default_attributes": {},
   "run_list": [
       "recipe[git]",

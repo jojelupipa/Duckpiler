@@ -129,7 +129,7 @@ automáticamente al hacer push a Github con un webhook).
 Y posteriormente lo hemos desplegado en Zeit con la orden `now`, que
 se ejecuta en función del contenido del archivo `now.json`.
 
-Contenedor: https://duckpiler-hinlulcolf.now.sh/
+Contenedor: https://duckpiler-gxwwizygwr.now.sh/
 
 
 Para el contenedor hemos utilizado un fichero Dockerfile que nos ha
@@ -188,8 +188,138 @@ máquina debidamente provisionada
 con [chef](https://www.chef.io/chef/). Simplemente tienes que usar
 `vagrant up` ya puedes disponer de una máquina con todo lo necesario.
 
+### Provisionamiento con chef
+
+**Chef-solo** es la herramienta que nos va a asegurar que la máquina que
+despleguemos va a tener todos los paquetes y herramientas necesarias
+para que nuestra aplicación funcione debidamente.
+
+Chef se basa en instalar *“recetas”* (recipes). El ejemplo más simple
+de esto puede ser nuestro
+archivo
+[git/default.rb](https://github.com/jojelupipa/Duckpiler/blob/master/provision/git/recipes/default.rb),
+cuyo contenido es el siguiente:
+
+```ruby
+package 'git'
+```
+
+Con lo cual instalará el paquete git allá donde se encuentre instalado
+chef-solo disponible para ser usado.
+
+Las recetas se agrupan en torno a *“cookbooks”*. “Libros de cocina”,
+el directorio que recoge las distintas recetas de nuestro proyecto *a
+cocinar*. Y será necesario indicarle a nuestro archivo de
+configuración cómo se llamará este directorio si no tomará
+“cookbooks” por omisión (`chef.cookbooks_path = "provision"`).
+
+Además hay otro elemento importante en chef, y estos son los *roles*,
+una manera de definir patrones de trabajo o un conjunto de acciones a
+realizar. Esto nos permite proporcionarle a nuestra máquina una *run
+list*, el conjunto de recetas que tendrá que instalar. De este modo
+sólo tendríamos que proporcionarle en el vagrantfile la ruta y el *role*
+a añadir.
+
+El *role* tiene esta estructura:
+
+```json
+{
+  "name": "vagrant",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "Vagrant instance, responsible for deploying a VM",
+  "default_attributes": {},
+  "run_list": [
+      "recipe[git]",
+      "recipe[npm]",
+      "recipe[nodejs]"
+  ]
+}
+```
+
+Donde se encuentran los metadatos que describen el *role* y lo más
+relevante: La *run list*, que indica las recetas que se han de
+instalar.
+
+Es necesario destacar que es posible tener más de una receta por
+programa. Es decir, que podríamos no solamente tener nuestro archivo
+*git/default.rb* que instale el paquete, sino que también podríamos
+tener otra receta para actualizarlo, a la que podríamos llamar
+*git/update.rb*. Si quisieramos lanzar esa receta en nuestra *run
+list* sería necesario indicar qué receta exactamente queremos instalar
+(Lo haríamos con `recipe[git::update]`. Por omisión toma
+`recipe[receta::default]`.).
+
+
+
+
+### Configuración entorno con Azure
+
 Esta configuración se ha hecho para desplegar una máquina virtual de
-azure. 
+azure con nuestra herramienta **Vagrant**. Para ello es necesario
+utilizar un archivo (programa escrito en ruby) [Vagrantfile](https://github.com/jojelupipa/Duckpiler/blob/master/Vagrantfile):
+
+```ruby
+# En primer tenemos que elegir la configuración de Vagrant. Algunas
+funcionalidades no están disponibles para otras versiones distinta a
+la usada ("2")
+
+Vagrant.configure("2") do |config|
+
+  ## Configuramos las máquinas virtuales de azure
+
+  ### Elegimos el nombre de la vagrantbox localmente
+  instalada/disponible en HasiCorp's Vagrant Cloud  que
+  usaremos levantar la máquina
+  config.vm.box = "azure"
+  
+  ### Proporcionaremos la ruta de nuestra clave privada para
+  conectarnos via SSH con nuestra máquina
+  config.ssh.private_key_path = '~/.ssh/id_rsa'
+
+  ## A continuación se procede a la configuración exclusiva de azure
+  config.vm.provider :azure do |azure, override|
+    ### Elegimos el nombre de la máquina virtual, en lugar de utilizar
+  uno aleatorio
+    azure.vm_name = "duckpiler"
+
+    ### Establecemos el nombre del grupo de recursos a usar. Nos puede
+    evitar crear uno con un nombre distinto en cada despliegue, pero
+    puede producir errores y demoras si se están realizando numerosos
+    despliegues (se puede comentar esta línea si esto supone un problema)
+    azure.resource_group_name = "duckpiler_resource_group"
+
+    ### Podemos elegir una ubicación adecuada para nuestras VM para
+    mejorar el rendimiento
+    azure.location = "westeurope"
+
+    ### Exponemos el puerto en el que nuestra aplicación escuchará
+    azure.tcp_endpoints = "80"
+    
+    ### También es necesario para usar azure configurar un conjunto de
+    claves e ID's cuya forma más segura de proporcionar es mediante
+    variables de entorno
+    azure.tenant_id = ENV['AZURE_TENANT_ID']
+    azure.client_id = ENV['AZURE_CLIENT_ID']
+    azure.client_secret = ENV['AZURE_CLIENT_SECRET']
+    azure.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']
+  end
+
+
+  ## Para el provisionamiento configuramos chef
+
+  config.vm.provision "chef_solo" do |chef|
+    ### Proporcionamos la ruta a los cookbooks
+    chef.cookbooks_path = "provision"
+    ### Ruta a los roles
+    chef.roles_path = "provision/roles"
+    ### Roles a añadir
+    chef.add_role("vagrant")
+end 
+```
+
+
+
 
 ### Replicación del entorno sin Azure
 
@@ -227,6 +357,9 @@ Para desplegar la aplicación en este nuevo entorno hemos
 usado [flightplan](https://www.npmjs.com/package/flightplan)
 *(aprovechando que estamos usando nodejs)*. 
 
+
+### Nuestros planes de vuelo
+
 Con este **conjunto de planes** podemos:
 
 Desplegar de cero la aplicación y tenerla de servicio
@@ -253,5 +386,66 @@ dos sencillas órdenes:
 
 `fly deployTo:azure --flightplan despliegue/flightplan.js`
 
+### ¿Cómo funcionan?
+
+Flightplan, como se puede ver
+en [su documentación](https://www.npmjs.com/package/flightplan) es una
+biblioteca de nodejs, la cual nos permite ejecutar secuencias de
+comandos shell en hosts locales y remotos. Osea, que para usarlo
+tendremos que escribir un archivo en javascript. Por lo cual, para usarlo lo
+primero que tenemos que hacer es describir nuestro *target*:
+
+```javascript
+plan.target('azure', {
+    host: 'duckpiler.westeurope.cloudapp.azure.com',
+    username: 'vagrant',
+    agent: process.env.SSH_AUTH_SOCK
+});
+```
+
+Donde nombramos nuestro target *“azure”*, e indicamos mediante un
+objeto javascript el resto de propiedades que nos interesen. En
+nuestro caso el host (DNS proporcionado por azure), el usuario
+(“vagrant” al estar por defecto usando vagrant) y el medio de
+autenticación.
+
+A continuación procedemos a definir
+los
+[planes de vuelo](https://github.com/jojelupipa/Duckpiler/blob/master/despliegue/flightplan.js): 
+
+```javascript
+plan.remote(
+    'deployTo',
+    remote => {
+        remote.log('Let\'s run Duckpiler');
+        
+        // Cloning repository
+        remote.exec('git clone https://github.com/jojelupipa/Duckpiler.git');
+
+        // Installing dependencies
+        remote.exec('npm install --prefix Duckpiler');
+
+        // Launching service
+        remote.exec('sudo npm start --prefix Duckpiler');
+    });
+```
+
+Con `plan.remote(name, fallback_func);` podemos ejecutar una secuencia de
+órdenes en nuestro host remoto. Entre las cuales se encuentran
+`log()`, para imprimir por pantalla, `exec()` para ejecutar órdenes
+(la más esencial), `sudo()` lo propio, pero como superusuario (Hay
+otras predefinidas como `echo, ls, rm`... que se usan en otros planes
+cuya funcionalidad es intuitiva y se pueden consultar en su
+documentación).
+
+Si quisieramos realizar acciones en el host local se puede utilizar
+`plan.local(fallback_func)`. Esto puede ser útil para realizar
+transferencias de archivos `local.transfer(files, remote_path)`. En
+nuestro caso esto no ha sido necesario pues hemos provisionado las
+máquinas para que puedan descargarse el repositorio con git.
+
 Normalmente, cuando está desplegada se encuentra la aplicación en
-[este dominio](http://duckpiler.westeurope.cloudapp.azure.com:8080).
+[este dominio](http://duckpiler.westeurope.cloudapp.azure.com).
+
+Este dominio es proporcionado por azure a la hora de publicar una
+máquina virtual con un nombre en una localización determinada.

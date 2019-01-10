@@ -184,7 +184,7 @@ automáticamente al hacer push a Github con un webhook).
 Y posteriormente lo hemos desplegado en Zeit con la orden `now`, que
 se ejecuta en función del contenido del archivo `now.json`.
 
-Contenedor: https://duckpiler-ronrdiarsz.now.sh/
+Contenedor: https://duckpiler-gxwwizygwr.now.sh/
 
 Para el contenedor hemos utilizado un fichero Dockerfile que nos ha
 permitido configurar cómo se construye dicho contenedor y qué comando
@@ -215,7 +215,7 @@ documentación [aquí](https://jojelupipa.github.io/Duckpiler/#replicaci%C3%B3n-
 Para desplegar la aplicación en este nuevo entorno hemos
 usado [flightplan](https://www.npmjs.com/package/flightplan)
 *(aprovechando que estamos usando nodejs)*. Con
-un [conjunto de planes](https://jojelupipa.github.io/Duckpiler/#despliegue-de-la-aplicaci%C3%B3n-en-entorno-remoto)
+un [conjunto de planes](https://jojelupipa.github.io/Duckpiler/#nuestros-planes-de-vuelo)
 para desplegar, detener o reanudar la aplicación (como parte de las
 tareas de mantenimiento).
 
@@ -227,9 +227,9 @@ dos sencillas órdenes:
 `fly deployTo:azure --flightplan despliegue/flightplan.js`
 
 Normalmente, cuando está desplegada se encuentra la aplicación en
-[este dominio](http://duckpiler.westeurope.cloudapp.azure.com:8080). Pero
+[este dominio](http://duckpiler.westeurope.cloudapp.azure.com). Pero
 por motivos didácticos aquí adjunto la IP actual:
 
-Despliegue final: 40.118.125.5:8080
+Despliegue final: 40.113.117.131
 
 [![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://naereen.github.io/badges/)
